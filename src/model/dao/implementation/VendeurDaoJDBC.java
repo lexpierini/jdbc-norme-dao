@@ -55,18 +55,8 @@ public class VendeurDaoJDBC implements VendeurDao {
 			rs = st.executeQuery();
 			
 			if (rs.next()) {
-				Departement dep = new Departement();
-				dep.setId(rs.getInt("DepartmentId"));
-				dep.setNom(rs.getString("DepName"));
-				
-				Vendeur obj = new Vendeur();
-				obj.setId(rs.getInt("Id"));
-				obj.setNom(rs.getString("Name"));
-				obj.setEmail(rs.getString("Email"));
-				obj.setDateNaissance(rs.getDate("BirthDate"));
-				obj.setSalaireBase(rs.getDouble("BaseSalary"));
-				obj.setDepartement(dep);
-				
+				Departement dep = instantiateDepartement(rs);
+				Vendeur obj = instantiateVendeur(rs, dep);
 				return obj;
 			}
 			
@@ -81,10 +71,29 @@ public class VendeurDaoJDBC implements VendeurDao {
 		}
 	}
 
+	private Vendeur instantiateVendeur(ResultSet rs, Departement dep) throws SQLException {
+		Vendeur obj = new Vendeur();
+		obj.setId(rs.getInt("Id"));
+		obj.setNom(rs.getString("Name"));
+		obj.setEmail(rs.getString("Email"));
+		obj.setDateNaissance(rs.getDate("BirthDate"));
+		obj.setSalaireBase(rs.getDouble("BaseSalary"));
+		obj.setDepartement(dep);
+		
+		return obj;
+	}
+
+	private Departement instantiateDepartement(ResultSet rs) throws SQLException {
+		Departement dep = new Departement();
+		dep.setId(rs.getInt("DepartmentId"));
+		dep.setNom(rs.getString("DepName"));
+		
+		return dep;
+	}
+
 	@Override
 	public List<Vendeur> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
