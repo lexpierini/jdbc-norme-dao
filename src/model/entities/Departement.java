@@ -7,14 +7,14 @@ public class Departement implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private String name;
+	private String nom;
 	
 	public Departement() {
 	}
 	
-	public Departement(Integer id, String name) {
+	public Departement(Integer id, String nom) {
 		this.id = id;
-		this.name = name;
+		this.nom = nom;
 	}
 
 	public Integer getId() {
@@ -25,12 +25,12 @@ public class Departement implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	@Override
@@ -60,6 +60,6 @@ public class Departement implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Departement [id=" + id + ", name=" + name + "]";
+		return "Departement [id=" + id + ", nom=" + nom + "]";
 	}	
 }
